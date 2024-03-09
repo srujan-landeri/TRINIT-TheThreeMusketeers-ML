@@ -179,23 +179,142 @@
 }
 
 .upload-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:20px;
+    margin-bottom: 20px;
+}
+
+.upload-heading button{
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width:150px;
+    border-radius: 10px;
+    background-color: #6e31ed;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
+}
+
+.upload-heading > div{
+    display: flex;
+    align-items: center;
+    gap:15px;
+}
+
+.upload-heading h1{
     font-weight: 300;
-    margin-top: 50px;
 }
 
 .upload-main-content{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap:60px;
+    gap:100px;
+    margin-top:20px;
+}
+
+.upload-content{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: center;
+    height: 50vh;
+}
+
+.upload-content h2{
+    font-weight: 300;
 }
 
 .upload-container{
-    height: 250px;
-    width: 400px;
-    border: 1px solid black;
+    height: 300px;
+    width: 600px;
+    border: 1px dashed rgb(46, 46, 46);
+    cursor: pointer;
 
+    border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.upload-label{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.upload-label p{
+    color: #1c1c1c;
+}
+
+.upload-image-container{
+    height: 400px;
+    width: 400px;
+}
+
+.upload-image-container img{
+    height: 100%;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.loader{
+    height: 30px;
+    margin-top: -4px;
+}
+
+.admin{
+    padding:30px 100px;
+    font-family: "Poppins", sans-serif;
+}
+
+.admin-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-title{
+    display: flex;
+    align-items: center;
+    gap:20px;
+}
+
+.logo-title h1{
+    font-weight: 300;
+}
+
+.nav{
+    display: flex;
+    gap:30px;
+}
+
+.nav button{
+    border: none;
+    outline: none;
+    color: rgb(26, 25, 25);;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-family: "Inder";
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+}
+
+.active{
+    border-bottom: 2px solid #6e31ed !important;
 }

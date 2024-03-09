@@ -14,9 +14,12 @@ import {
 } from 'firebase/auth';
 
 import {toast} from "react-toastify"
+import loader from "../assets/loader.svg"
+import { useNavigate } from "react-router-dom";
 
-import { useNavigate } from 'react-router-dom';
 
+import {db} from '../Firebase'
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 
 // importing user, mail, password, eye icon from react-icons
 import {FaUser} from "react-icons/fa";
@@ -27,6 +30,8 @@ import google from "../assets/google.png";
 import login from '../assets/login.png';
 
 export function LoginPage(){
+    const navigate = useNavigate();
+
     const [registerDetails, setRegisterDetails] = useState({
         username: '',
         email: '',
@@ -37,8 +42,6 @@ export function LoginPage(){
         email: '',
         password: ''
     });
-
-    const navigate = useNavigate();
     
     function onInputChange(e){
         setRegisterDetails({
@@ -54,9 +57,29 @@ export function LoginPage(){
         });
     }
 
-    async function signup(){
-        try{
+    function changeRoute(route){
+        navigate(route);
+    }
+
+    const [signinLoading, setSigninLoading] = useState(false);
+    const [signupLoading, setSignupLoading] = useState(false);
+
+    async function isAdmin(email) {
+        const db = getFirestore();
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("email", "==", email));
     
+        const querySnapshot = await getDocs(q);
+        const userDocs = querySnapshot.docs.map(doc => {
+            console.log(doc.data())
+            return doc.data()
+        });
+        return userDocs.some(user => user.role === 'admin');
+    }
+
+    async function signup(){
+        setSignupLoading(true);
+        try{
             await createUserWithEmailAndPassword(
                 auth,
                 registerDetails.email,
@@ -66,11 +89,13 @@ export function LoginPage(){
             updateProfile(auth.currentUser, {
                 displayName:registerDetails.name
             })
+            setSignupLoading(false);
             toast.success("You are successfully registered");
-            navigate('/user');
+            changeRoute('/user');
         }
         catch(error){
             toast.error("Something went wrong");
+            setSignupLoading(false);
         }
     }
 
@@ -81,9 +106,17 @@ export function LoginPage(){
             const user = result.user;
             
             if(user){
-                toast.success("You are successfully logged in")
-                navigate('/user');
+                const isAdminUser = await isAdmin(user.email);
+                if (isAdminUser) {
+                    // If the user is an admin, do something
+                    changeRoute('/admin')
+                    toast.success("Welcome back Admin");
+                } else {
+                    // If the user is not an admin, do something else
+                    changeRoute('/user');
+                }
             }
+
             else{
                 toast.error("Something went wrong")
             }
@@ -110,7 +143,8 @@ export function LoginPage(){
     }
 
     async function signIn(){
-        console.log(signinDetails, "Trying to sign in")
+        setSigninLoading(true)
+        toast("loader is set to true")
         try{
             const userCredential = await signInWithEmailAndPassword(
                 auth,
@@ -119,8 +153,20 @@ export function LoginPage(){
             )
     
             if(userCredential.user){
-              toast.success("You are successfully logged in")
-              navigate('/user');
+                // localStorage.setItem('user', JSON.stringify(userCredential.user));
+                const isAdminUser = await isAdmin(signinDetails.email);
+                console.log(isAdminUser)
+                if (!isAdminUser) {
+                    changeRoute('/user')
+                    toast.success("You are successfully logged in");
+                } else {
+                    changeRoute('admin')
+                    toast.success("Welcome back Admin");
+                }
+                setSigninLoading(false)
+            }else{
+                toast.error("Something went wrong")
+                setSigninLoading(false)
             }
         }
     
@@ -139,11 +185,12 @@ export function LoginPage(){
             else{
                 toast.error(error.message.split('/')[1])
             }
+            setSigninLoading(false)
         }
     }
 
     const [showPassword, setShowPassword] = useState(false);
-    const [showSignUp, setShowSignUp] = useState(true);
+    const [showSignUp, setShowSignUp] = useState(false);
 
     return (
         <>
@@ -172,10 +219,8 @@ export function LoginPage(){
                         <p>Already have an account? <span onClick={() => setShowSignUp(!showSignUp)}>Login</span></p>
                         </div>
 
-                       
-
                         <div className='input-container'>
-                            <button onClick={signup}>SignUp</button>    
+                            <button onClick={signup}> {signupLoading? <img className='loader' src={loader} alt="" /> : "SignUp"} </button>
                         </div>
 
                         <div style={{ display: "flex", alignItems: "center", margin: "10px 0" }}>
@@ -185,8 +230,7 @@ export function LoginPage(){
                         </div>
 
                         <button className="google-btn" onClick={handleGoogleSignIn}>
-                            <img src={google} alt="" />
-                            Sign In with Google
+                            <img src={google} alt="" /> Sign In with Google 
                         </button>
 
                     </div>
@@ -196,6 +240,7 @@ export function LoginPage(){
                 </div>
             </div> }
 
+            {/* SIGNIN */}
             {!showSignUp && <div className='signup'>
                 <div className='signup-content'>
                     <h1>Let's Signin</h1>
@@ -218,7 +263,7 @@ export function LoginPage(){
                         </div>
 
                         <div className='input-container'>
-                            <button onClick={signIn}>Signin</button>    
+                        <button onClick={signIn}> {signinLoading? <img className='loader' src={loader} alt="" /> : "SignIn"} </button>
                         </div>
 
                         <div style={{ display: "flex", alignItems: "center", margin: "10px 0" }}>
@@ -227,9 +272,8 @@ export function LoginPage(){
                             <hr style={{ flex: 1 }} />
                         </div>
 
-                        <button className="google-btn" onClick={handleGoogleSignIn}>
-                            <img src={google} alt="" />
-                            Sign In with Google
+                        <button className="google-btn" onClick={handleGoogleSignIn}>            
+                            <img src={google} alt="" /> Sign Up with Google
                         </button>
                     </div>
                 </div>

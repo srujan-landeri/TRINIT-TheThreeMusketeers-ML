@@ -9,14 +9,18 @@ export function HomePage() {
 
   const navigate = useNavigate();
 
+  function changeRoute(){
+    navigate("/login");
+  }
+
   return (
     <div className="home">
       <img className="wave" src={wave} alt="wave" />
       <img className="rocket" src={rocket} alt="" />
       <div className="home-heading">
         <h2>PaveGuardian</h2>
-        <p>AI-Powered Rad Damage Detection For Safer, Smoother Journeys</p>
-        <button onClick={() => navigate('/login')}>SIGNUP</button>
+        <p>AI-Powered Road Damage Detection For Safer, Smoother Journeys</p>
+        <button onClick={changeRoute}>SIGNUP</button>
       </div>
     </div>
   );

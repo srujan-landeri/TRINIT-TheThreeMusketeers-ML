@@ -1,102 +1,100 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+
 import { auth } from '../Firebase'; // import your firebase config
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { FaSignOutAlt } from 'react-icons/fa';
 
-import upload from '../assets/file uplaod.png';
-import illustration from '../assets/upload illustration.png'
+import upload from '../assets/file upload.png';
+import illustration from '../assets/upload illustration.jpg'
+import icon from "../assets/icon.png"
 
 export function UserPage() {
-    const [images, setImages] = useState([]);
-    const [urls, setUrls] = useState([]);
-    const [isDragOver, setIsDragOver] = useState(false);
     const user = auth.currentUser;
     const navigate = useNavigate();
 
+    function signout(){
+        auth.signOut().then(() => {
+          navigate('/login')
+        }).catch((error) => {
+          console.log(error)
+        });
+      }
+
     useEffect(() => {
-        document.addEventListener('dragover', handleDragOver);
-        document.addEventListener('dragleave', handleDragLeave);
-        document.addEventListener('drop', handleDrop);
+
+        // Not Logged in properly
+        if(!user){
+            navigate('/login');
+        }
+
+        const container = document.querySelector('.upload-main-content');
+        container.addEventListener('dragover', handleDragOver);
+        container.addEventListener('dragleave', handleDragLeave);
+        container.addEventListener('drop', handleDrop);
 
         return () => {
-            document.removeEventListener('dragover', handleDragOver);
-            document.removeEventListener('dragleave', handleDragLeave);
-            document.removeEventListener('drop', handleDrop);
+            container.removeEventListener('dragover', handleDragOver);
+            container.removeEventListener('dragleave', handleDragLeave);
+            container.removeEventListener('drop', handleDrop);
         };
     }, []);
 
-    if (!user || user == null || user == undefined) {
-        toast.error("Not authorized to view this page. Please login first.")
-        navigate('/login')
+    function signout(){
+        auth.signOut().then(() => {
+            navigate('/login')
+        }).catch((error) => {
+            console.log(error)
+        });
     }
 
     const handleDragOver = (e) => {
         e.preventDefault();
-        setIsDragOver(true);
+        e.dataTransfer.dropEffect = 'copy';
+        document.querySelector('.upload-container').style.transform = 'scale(1.2)';
     };
 
     const handleDragLeave = () => {
-        setIsDragOver(false);
+        document.querySelector('.upload-container').style.transform = 'scale(1)';
     };
 
     const handleDrop = (e) => {
         e.preventDefault();
-        setIsDragOver(false);
+        document.querySelector('.upload-container').style.transform = 'scale(1)';
 
-        if (e.dataTransfer.files) {
-            setImages([...e.dataTransfer.files]);
+        if (e.dataTransfer.files.length > 0) {
+            // Handle the dropped files here
+            console.log('Files dropped:', e.dataTransfer.files);
+            toast.success('Files dropped successfully');
         }
-    };
-
-    const handleChange = (e) => {
-        if (e.target.files) {
-            setImages([...e.target.files]);
-        }
-    };
-
-    const handleUpload = async () => {
-        // Implement your image upload logic here
-        // You can use the setImages state to get the selected images
     };
 
     return (
-        // <div className={`user-page-container ${isDragOver ? 'drag-over' : ''}`}>
-        //     <h1 className='upload-heading'>Welcome, {user && user.displayName}</h1>
-
-        //     <label
-        //         className="custom-file-upload"
-        //         onDragOver={handleDragOver}
-        //         onDragLeave={handleDragLeave}
-        //         onDrop={handleDrop}
-        //     >
-        //         <input
-        //             type="file"
-        //             onChange={handleChange}
-        //             multiple
-        //             style={{ display: 'none' }}
-        //         />
-        //         <img className='upload-image' src={upload} alt="Upload Icon" />
-        //         {isDragOver ? 'Drop Images Here' : 'Drag & Drop Images or Click to Select'}
-        //     </label>
-        // </div>
-
         <div className='upload'>
-            <h1 className='upload-heading'>Welcome, {user && user.displayName}</h1>
+            <div className='upload-heading'>
+                <div>
+                    <img src={icon} alt="" />
+                    <h1>PaveGuardian</h1>
+                </div>
+                
+                <button onClick={signout}>
+                    Logout
+                    <FaSignOutAlt />    
+                </button>
+            </div>
 
             <div className='upload-main-content'>
-                <div className='upload-container'>
-                    <label 
-                        className="upload-label"
-                        onDragOver={handleDragOver}
-                        onDragLeave={handleDragLeave}
-                        onDrop={handleDrop}
-                    >
-                    <img src={upload} alt="" />
-                    <input type="file" onChange={handleChange} multiple style={{ display: 'none' }} />
-                    </label>
+                <div className='upload-content'>
+                    <h2>Upload images and scan for damaged roads</h2>
+                    <div className='upload-container'>
+                        <label className="upload-label">
+                            <img src={upload} alt="" />
+                            <input type="file" onChange={() => { }} multiple style={{ display: 'none' }} />
+                            <p>UPLOAD / DRAG AND DROP IMAGES</p>
+                        </label>
+                    </div>
                 </div>
-
-                <div>
+                <div className='upload-image-container'>
                     <img src={illustration} alt="" />
                 </div>
             </div>
