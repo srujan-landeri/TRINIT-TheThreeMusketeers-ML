@@ -10,8 +10,20 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  ToastAndroid,
   View,
 } from "react-native";
+import { auth } from "../Firebase";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
+
 const logo = require("../assets/road_logo-removebgf.png");
 const google = require("../assets/google.png");
 const twitter = require("../assets/twitter.png");
@@ -19,8 +31,99 @@ const instagram = require("../assets/instagram.png");
 
 export default function LoginForm({ navigation }) {
   const [click, setClick] = useState(false);
-  const { username, setUsername } = useState("");
-  const { password, setPassword } = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleForgotPassword(e) {
+    //!check and implement
+    // e.preventDefault();
+    if (email !== "") {
+      try {
+        const auth = getAuth();
+        await sendPasswordResetEmail(auth, email);
+        ToastAndroid.show(
+          "Password reset mail was sent, if the account existed.",
+          ToastAndroid.LONG
+        );
+        console.log("Password reset mail was sent, if the account existed.");
+      } catch (error) {
+        console.log(error);
+        ToastAndroid.show(
+          "Couldn't send reset password to given mail id",
+          ToastAndroid.LONG
+        );
+        console.log("Couldn't send reset password to given mail id");
+      }
+    } else {
+      ToastAndroid.show("Enter a valid Email", ToastAndroid.LONG);
+      console.log("Enter a valid Email");
+    }
+  }
+
+  async function signIn() {
+    console.log(email, password, "Trying to sign in");
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      if (userCredential.user) {
+        ToastAndroid.show("You are successfully logged in", ToastAndroid.SHORT);
+        console.log("You are successfully logged in");
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "HomePage" }],
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      let message = error.message.split("/")[1];
+      if (message === "invalid-credential).") {
+        ToastAndroid.show(
+          "Incorrect Email or Password. Try Again",
+          ToastAndroid.LONG
+        );
+        console.log("Incorrect Email or Password. Try Again");
+      } else if (message === "user-not-found).") {
+        ToastAndroid.show("User Not Found", ToastAndroid.LONG);
+        console.log("User Not Found");
+      } else if (message === "network-request-failed).") {
+        ToastAndroid.show("Network Error", ToastAndroid.LONG);
+        console.log("Network Error");
+      } else {
+        ToastAndroid.show(error.message, ToastAndroid.LONG);
+        console.log(error.message);
+      }
+    }
+  }
+
+  async function handleGoogleSignIn() {
+    try {
+      console.log(auth);
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      if (user) {
+        ToastAndroid.show("You are successfully logged in", ToastAndroid.SHORT);
+        console.log("You are successfully logged in", ToastAndroid.SHORT);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "HomePage" }],
+        });
+      } else {
+        ToastAndroid.show("Something went wrong" + user, ToastAndroid.LONG);
+        console.log("Something went wrong" + user, ToastAndroid.LONG);
+      }
+    } catch (error) {
+      ToastAndroid.show(`${error}`, ToastAndroid.LONG);
+      console.log("Something went wrong" + error, ToastAndroid.LONG);
+      console.log(error);
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.image} resizeMode="contain" />
@@ -29,8 +132,8 @@ export default function LoginForm({ navigation }) {
         <TextInput
           style={styles.input}
           placeholder="EMAIL"
-          value={username}
-          onChangeText={setUsername}
+          value={email}
+          onChangeText={setEmail}
           autoCorrect={false}
           autoCapitalize="none"
         />
@@ -54,29 +157,38 @@ export default function LoginForm({ navigation }) {
           <Text style={styles.rememberText}>Remember Me</Text>
         </View>
         <View>
-          <Pressable onPress={() => Alert.alert("Forget Password!")}>
+          <Pressable onPress={handleForgotPassword}>
             <Text style={styles.forgetText}>Forgot Password?</Text>
           </Pressable>
         </View>
       </View>
 
       <View style={styles.buttonView}>
-        <Pressable
-          style={styles.button}
-          onPress={() => Alert.alert("Login Successfull!")}
-        >
+        <Pressable style={styles.button} onPress={signIn}>
           <Text style={styles.buttonText}>LOGIN</Text>
         </Pressable>
         <Text style={styles.optionsText}>OR LOGIN WITH</Text>
       </View>
 
       <View style={styles.mediaIcons}>
-        <Image source={google} style={styles.icons} />
-        <Image source={twitter} style={styles.icons} />
-        <Image source={instagram} style={styles.icons} />
+        <TouchableOpacity>
+          <Image source={google} style={styles.icons} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image source={twitter} style={styles.icons} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image source={instagram} style={styles.icons} />
+        </TouchableOpacity>
       </View>
 
-      <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
+      <TouchableOpacity
+        onPress={() => {
+          setEmail("");
+          setPassword("");
+          navigation.navigate("SignUpScreen");
+        }}
+      >
         <Text style={styles.footerText}>
           Don't Have Account?
           <Text style={styles.signup}> Sign Up</Text>

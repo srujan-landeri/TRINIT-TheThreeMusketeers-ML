@@ -11,16 +11,69 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  ToastAndroid,
 } from "react-native";
+
+import { auth } from "../Firebase";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
+
 const logo = require("../assets/road_logo-removebgf.png");
 const google = require("../assets/google.png");
 const twitter = require("../assets/twitter.png");
 const instagram = require("../assets/instagram.png");
 
-export default function LoginForm({ navigation }) {
+export default function SignupForm({ navigation }) {
   const [click, setClick] = useState(false);
-  const { username, setUsername } = useState("");
-  const { password, setPassword } = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSignup() {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+
+      ToastAndroid.show("You are successfully registered", ToastAndroid.SHORT);
+      console.log("You are successfully registered");
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "HomePage" }],
+      });
+    } catch (error) {
+      ToastAndroid.show(`${error}`, ToastAndroid.LONG);
+      console.log("Something went wrong" + error);
+    }
+  }
+
+  async function handleGoogleSignIn() {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      if (user) {
+        ToastAndroid.show("You are successfully logged in", ToastAndroid.SHORT);
+        console.log("You are successfully logged in");
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "HomePage" }],
+        });
+      } else {
+        ToastAndroid.show("Something went wrong" + user, ToastAndroid.LONG);
+        console.log("Something went wrong" + user);
+      }
+    } catch (error) {
+      ToastAndroid.show(error.message, ToastAndroid.LONG);
+      console.log("Something went wrong" + error);
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.image} resizeMode="contain" />
@@ -29,8 +82,8 @@ export default function LoginForm({ navigation }) {
         <TextInput
           style={styles.input}
           placeholder="EMAIL"
-          value={username}
-          onChangeText={setUsername}
+          value={email}
+          onChangeText={setEmail}
           autoCorrect={false}
           autoCapitalize="none"
         />
@@ -56,22 +109,31 @@ export default function LoginForm({ navigation }) {
       </View>
 
       <View style={styles.buttonView}>
-        <Pressable
-          style={styles.button}
-          onPress={() => Alert.alert("Login Successfull!")}
-        >
+        <Pressable style={styles.button} onPress={handleSignup}>
           <Text style={styles.buttonText}>Register</Text>
         </Pressable>
         <Text style={styles.optionsText}>OR SIGN-UP WITH</Text>
       </View>
 
       <View style={styles.mediaIcons}>
-        <Image source={google} style={styles.icons} />
-        <Image source={twitter} style={styles.icons} />
-        <Image source={instagram} style={styles.icons} />
+        <TouchableOpacity>
+          <Image source={google} style={styles.icons} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image source={twitter} style={styles.icons} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image source={instagram} style={styles.icons} />
+        </TouchableOpacity>
       </View>
 
-      <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
+      <TouchableOpacity
+        onPress={() => {
+          setEmail("");
+          setPassword("");
+          navigation.navigate("LoginScreen");
+        }}
+      >
         <Text style={styles.footerText}>
           Have an Account?
           <Text style={styles.signup}> Login</Text>
