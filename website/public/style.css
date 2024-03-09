@@ -318,3 +318,42 @@
 .active{
     border-bottom: 2px solid #6e31ed !important;
 }
+
+.road_image{
+    height: 300px;
+    margin-right:30px;
+    border-radius: 10px;;
+    cursor: pointer;
+}
+
+.damage_type{
+    margin-block:50px;
+}
+
+.damage_type h3{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.damage_images{
+    display: flex;
+    align-items: center;
+    margin-top:30px;
+}
+
+/* button */
+.view_more{
+    float: right;
+    margin-right:30px;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    background-color: #6e31ed;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
