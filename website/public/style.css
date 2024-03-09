@@ -321,7 +321,6 @@
 
 .road_image{
     height: 300px;
-    margin-right:30px;
     border-radius: 10px;;
     cursor: pointer;
 }
@@ -338,7 +337,12 @@
 .damage_images{
     display: flex;
     align-items: center;
-    margin-top:30px;
+    margin-block:30px;
+    gap:30px;
+}
+
+.damaged_roads{
+    padding-bottom:50px;
 }
 
 /* button */
@@ -356,4 +360,35 @@
     display: flex;
     align-items: center;
     gap:10px;
+    cursor: pointer;
+}
+
+.damage-heading{
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    padding-left:15px;
+    margin-block:30px;
+    align-items: center;
+}
+
+.damage-heading h3{
+    font-weight: 500;
+    font-size:25px;
+}
+
+
+.damage_images_grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* centers items horizontally */
+    align-items: center; /* centers items vertically */
+    width:100%;
+}
+
+.road-images{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 15px;
+    gap:30px;
 }

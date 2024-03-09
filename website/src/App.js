@@ -2,7 +2,6 @@ import {HomePage} from "./Pages/HomePage";
 import {LoginPage} from "./Pages/LoginPage";
 import {UserPage} from "./Pages/UserPage";
 import {AdminPage} from "./Pages/AdminPage";
-import {AllImages} from "./Pages/AllImages";
 
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
@@ -17,7 +16,6 @@ function App() {
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/user" element={<UserPage/>}/>
           <Route path="/admin" element={<AdminPage/>}/>
-          <Route path="/all-images" element={<AllImages/>}/>
           <Route path="*" element={<h1>404 Not Found!</h1>}/>
         </Routes>
       </Router>
