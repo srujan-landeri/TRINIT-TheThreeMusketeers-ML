@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { auth } from '../Firebase';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,6 +38,19 @@ export function AdminPage() {
         return userDocs.some(user => user.role === 'admin');
       }
 
+      async function getModelOutputs() {
+          const db = getFirestore();
+          const modelOutputsRef = collection(db, "images");
+          const snapshot = await getDocs(modelOutputsRef);
+          const modelOutputs = snapshot.docs.map(doc => doc.data());
+          return modelOutputs;
+      }
+
+      // getModelOutputs().then(modelOutputs => {
+      //     console.log(modelOutputs); 
+      // });
+
+
       // if(auth.currentUser) {
       //   isAdmin(auth.currentUser.email).then(isAdmin => {
       //     if(!isAdmin) {
@@ -49,6 +62,20 @@ export function AdminPage() {
       // }
   })
 
+  async function uploadData(proxyData) {
+    const db = getFirestore();
+    const outputsRef = collection(db, "outputs");
+
+    for (let key in proxyData) {
+        const docRef = doc(outputsRef, key);
+        await setDoc(docRef, { data: proxyData[key] });
+    }
+}
+
+uploadData(proxyData).catch((error) => {
+    console.error("Error adding document: ", error);
+});
+
   const [currentTab, setCurrentTab] = React.useState('Detected Damages');
 
   function changeTab(tab){
@@ -57,6 +84,8 @@ export function AdminPage() {
 
   return (
     <div className='admin'>
+      <button onClick={() => console.log(proxyData)}>Checker</button>
+      <button onClick={uploadData}>Upload</button>
       {!loading &&
         <>
         <div className='admin-header'>
