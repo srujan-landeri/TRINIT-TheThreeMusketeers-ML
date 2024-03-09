@@ -22,11 +22,13 @@ const Homepage = ({ navigation }) => {
       allowsEditing: true,
       quality: 1,
       base64: true,
+      exif: true,
     }).catch((error) => {
       console.log(error);
     });
 
     console.log(Object.keys(result.assets[0]));
+    console.log(result.assets[0].exif);
 
     if (!result.canceled) {
       //   setImage(result.assets[0].uri);
@@ -35,13 +37,15 @@ const Homepage = ({ navigation }) => {
   };
   const launchCamera = async () => {
     // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchCameraAsync({ base64: true }).catch(
-      (error) => {
-        console.log(error);
-      }
-    );
+    let result = await ImagePicker.launchCameraAsync({
+      base64: true,
+      exif: true,
+    }).catch((error) => {
+      console.log(error);
+    });
 
     console.log(Object.keys(result.assets[0]));
+    console.log(result.assets[0].exif);
     // console.log(Object.keys(result.assets));
 
     if (!result.canceled) {
@@ -103,14 +107,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageContainer: {
-    marginTop: 10,
+    marginTop: 0,
     alignItems: "center",
     justifyContent: "center",
   },
   logoImage: {
     height: 200,
     width: 200,
-    marginTop: 30,
+    marginTop: 0,
   },
   title: {
     fontSize: 24,
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   box: {
-    marginTop: 40,
+    marginTop: 20,
     justifyContent: "space-between",
     alignItems: "center",
     width: 340,
