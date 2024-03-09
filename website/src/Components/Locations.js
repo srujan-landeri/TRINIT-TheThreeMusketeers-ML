@@ -28,8 +28,8 @@ export function Locations(props) {
 
     setMap(map);
 
-    let colorPalette={"D0": "#ff4a18cc", "D10": "#008000cc", "D20": "#ffa500cc", "D40": "#007acccc"};
-    let labelNames={"D0": "Longitudinal Crack", "D10": "Transverse Crack", "D20": "Alligator Crack", "D40": "Pothole"};
+    let colorPalette={"D0": "#ff4a18cc","D00": "#ff4a18cc", "D10": "#008000cc", "D20": "#ffa500cc", "D40": "#007acccc"};
+    let labelNames={"D0": "Longitudinal Crack","D00": "Longitudinal Crack", "D10": "Transverse Crack", "D20": "Alligator Crack", "D40": "Pothole"};
 
     // const markerInstance = new tt.Marker(<div style={{backgroundColor:"red", height:"50px",width:"50px"}}>HELLOOOOOOOOOO</div>).setLngLat([mapLongitude, mapLatitude]).addTo(map);
 
@@ -39,13 +39,14 @@ export function Locations(props) {
     const makeMarker=(lat,long,text,img)=>{
         const markerInstance = new tt.Marker({color:colorPalette[text]}).setLngLat([long,lat]).addTo(map);
         
-        const popupInstance = new tt.Popup({ offset: [5, -35] }).setHTML(`<p>${text+": "+labelNames[text]}</p> &nbsp; <img src=data:image/png;base64,${img} alt="" style="width:200px;height:200px;"/>`);
+        const popupInstance = new tt.Popup({ offset: [5, -35] }).setHTML(`<p>${text+":"+labelNames[text]}</p> &nbsp; <img src=data:image/png;base64,${img} alt="" style="width:200px;height:200px;"/>`);
         markerInstance.setPopup(popupInstance);
     }
 
     //adding markers..
     for (let label in imageData) {
         for (let image of imageData[label]) {
+          if(image.latitude!="" && image.longitude!="")
             makeMarker(image.latitude, image.longitude, label,image.image);
         }
     }
