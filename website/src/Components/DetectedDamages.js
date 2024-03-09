@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { FaArrowRight } from 'react-icons/fa'
 import { FaArrowLeft } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom';
+import { FaTimes } from 'react-icons/fa';
 
 export function DetectedDamages(props) {
 
@@ -9,6 +10,8 @@ export function DetectedDamages(props) {
     const {data} = props;
     const [showMore, setShowMore] = useState({});
     const [damage, setDamage] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const toggleShowMore = (key) => {
         setShowMore(prevState => ({ ...prevState, [key]: !prevState[key] }));
@@ -29,7 +32,7 @@ export function DetectedDamages(props) {
                             {(showMore[key] ? data[key] : data[key].slice(0, 4)).map((damage, index) => {
                                 return (
                                     <div key={index} className='damage_image'>
-                                        <img className = "road_image" src={`data:image/jpeg;base64,${damage.image}`} alt="" />
+                                        <img className="road_image" src={`data:image/jpeg;base64,${damage.image}`} alt="" onClick={() => {setIsModalOpen(true); setSelectedImage({image:damage.image, label: key, latitude: damage.latitude, longitude: damage.longitude});}} />                       
                                     </div>
                                 )
                             })}
@@ -52,14 +55,27 @@ export function DetectedDamages(props) {
                 </button>
             </div>
             <div className='road-images'>
-                {data[damage].map((damage, index) => {
+                {data[damage].map((item, index) => {
                     return (
-                        <img className = "road_image" src={`data:image/jpeg;base64,${damage.image}`} alt="" />
-                    )
+                            <img className="road_image" src={`data:image/jpeg;base64,${item.image}`} alt="" onClick={() => {setIsModalOpen(true); setSelectedImage({image:item.image, label: damage, latitude: item.latitude, longitude: item.longitude})}} />                       
+                        )
                 })}
             </div>
-            
         </div>)}
+
+        {isModalOpen && (
+            <div className="modal">
+                <div className="modal-content">
+                    <FaTimes size={22} style={{position: "absolute", top: "20px", right: "20px", color:"red", cursor:"pointer"}} onClick={() => setIsModalOpen(false)} />
+                    <img className="modal-image" src={`data:image/jpeg;base64,${selectedImage.image}`} alt="" />
+                    <div className="modal-details">
+                        <p>Label: <span>{selectedImage.label}</span></p>
+                        <p>Latitude: <span>{selectedImage.latitude}</span></p>
+                        <p>Longitude: <span>{selectedImage.longitude}</span></p>
+                    </div>
+                </div>
+            </div>
+        )}
         </>
     )
 }
