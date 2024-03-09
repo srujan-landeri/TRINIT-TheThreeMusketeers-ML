@@ -24,7 +24,7 @@ export default function LoginForm({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.image} resizeMode="contain" />
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Sign-up</Text>
       <View style={styles.inputView}>
         <TextInput
           style={styles.input}
@@ -53,11 +53,6 @@ export default function LoginForm({ navigation }) {
           />
           <Text style={styles.rememberText}>Remember Me</Text>
         </View>
-        <View>
-          <Pressable onPress={() => Alert.alert("Forget Password!")}>
-            <Text style={styles.forgetText}>Forgot Password?</Text>
-          </Pressable>
-        </View>
       </View>
 
       <View style={styles.buttonView}>
@@ -65,9 +60,9 @@ export default function LoginForm({ navigation }) {
           style={styles.button}
           onPress={() => Alert.alert("Login Successfull!")}
         >
-          <Text style={styles.buttonText}>LOGIN</Text>
+          <Text style={styles.buttonText}>Register</Text>
         </Pressable>
-        <Text style={styles.optionsText}>OR LOGIN WITH</Text>
+        <Text style={styles.optionsText}>OR SIGN-UP WITH</Text>
       </View>
 
       <View style={styles.mediaIcons}>
@@ -76,10 +71,10 @@ export default function LoginForm({ navigation }) {
         <Image source={instagram} style={styles.icons} />
       </View>
 
-      <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
+      <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
         <Text style={styles.footerText}>
-          Don't Have Account?
-          <Text style={styles.signup}> Sign Up</Text>
+          Have an Account?
+          <Text style={styles.signup}> Login</Text>
         </Text>
       </TouchableOpacity>
     </SafeAreaView>
