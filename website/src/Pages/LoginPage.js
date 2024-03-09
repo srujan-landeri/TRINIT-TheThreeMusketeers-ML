@@ -144,7 +144,6 @@ export function LoginPage(){
 
     async function signIn(){
         setSigninLoading(true)
-        toast("loader is set to true")
         try{
             const userCredential = await signInWithEmailAndPassword(
                 auth,
@@ -160,7 +159,7 @@ export function LoginPage(){
                     changeRoute('/user')
                     toast.success("You are successfully logged in");
                 } else {
-                    changeRoute('admin')
+                    changeRoute('/admin')
                     toast.success("Welcome back Admin");
                 }
                 setSigninLoading(false)

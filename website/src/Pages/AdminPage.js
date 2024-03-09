@@ -4,12 +4,17 @@ import { auth } from '../Firebase';
 import { useNavigate } from 'react-router-dom';
 
 import icon from "../assets/icon.png"
+import { toast } from 'react-toastify';
 
+import data from '../data/images/random_coords_with_images.json'
+import { DetectedDamages } from '../Components/DetectedDamages';
+import { Locations } from '../Components/Locations';
+import { Statistics } from '../Components/Statistics';
 
 export function AdminPage() {
-
   const navigate = useNavigate();
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
+  const [proxyData, setProxyData] = React.useState(data);
 
   function signout(){
     auth.signOut().then(() => {
@@ -31,17 +36,17 @@ export function AdminPage() {
             return doc.data()
         });
         return userDocs.some(user => user.role === 'admin');
-    }
+      }
 
-    // if(auth.currentUser) {
-    //   isAdmin(auth.currentUser.email).then(isAdmin => {
-    //     if(!isAdmin) {
-    //       navigate('/login')
-    //     }
-    //   }).then(() => setLoading(false))
-    // }else{
-    //   navigate('/login')
-    // }
+      // if(auth.currentUser) {
+      //   isAdmin(auth.currentUser.email).then(isAdmin => {
+      //     if(!isAdmin) {
+      //       navigate('/login')
+      //     }
+      //   }).then(() => setLoading(false))
+      // }else{
+      //   navigate('/login')
+      // }
   })
 
   const [currentTab, setCurrentTab] = React.useState('Detected Damages');
@@ -52,20 +57,33 @@ export function AdminPage() {
 
   return (
     <div className='admin'>
-      <div className='admin-header'>
-          
-          <div className='logo-title'>
-            <img src={icon} alt="icon" />
-            <h1>PaveGuardian</h1>
-          </div>
+      {!loading &&
+        <>
+        <div className='admin-header'>
+            
+            <div className='logo-title'>
+              <img src={icon} alt="icon" />
+              <h1>PaveGuardian</h1>
+            </div>
 
-          <div className='nav'>
-            <button className={currentTab === "Detected Damages"? "active" : ""} onClick={() => changeTab("Detected Damages")}>Detected Damages</button>
-            <button className={currentTab === "Locations"? "active" : ""} onClick={() => changeTab("Locations")}>Locations</button>
-            <button className={currentTab === "Statistics"? "active" : ""} onClick={() => changeTab("Statistics")}>Stats</button>
-            <button onClick={signout}>Logout</button>
-          </div>
-      </div>
+            <div className='nav'>
+              <button className={currentTab === "Detected Damages"? "active" : ""} onClick={() => changeTab("Detected Damages")}>Detected Damages</button>
+              <button className={currentTab === "Locations"? "active" : ""} onClick={() => changeTab("Locations")}>Locations</button>
+              <button className={currentTab === "Statistics"? "active" : ""} onClick={() => changeTab("Statistics")}>Stats</button>
+              <button onClick={signout}>Logout</button>
+            </div>
+
+        </div>
+        <div className='admin-body'>
+          {proxyData && currentTab === "Detected Damages" && <DetectedDamages data={proxyData} />}
+          {proxyData && currentTab === "Locations" && <Locations data={proxyData} />}
+          {proxyData && currentTab === "Statistics" && <Statistics data={proxyData} />}
+        </div>
+        </>
+      }
+      {
+        loading && <div>Loading...</div>
+      }
     </div>
   )
 }
