@@ -14,6 +14,8 @@ const logo = require("../assets/road_logo-removebgf.png");
 const gallery = require("../assets/imageUpload.png");
 const camera = require("../assets/camera.png");
 
+const BACKEND_URL=null //! add backend url
+
 const Homepage = ({ navigation }) => {
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -51,13 +53,32 @@ const Homepage = ({ navigation }) => {
     if (!result.canceled) {
       //   setImage(result.assets[0].uri);
       // sendImageToBackend(result.assets[0].base64);
-      sendImageToBackend(result);
+      sendImageToBackend(result.assets[0].base64);
     }
   };
 
   const sendImageToBackend = async (base64) => {
     console.log("sending image to backend..");
     ToastAndroid.show("sending image to backend..", ToastAndroid.SHORT);
+
+    if(BACKEND_URL==null)return;
+    
+    const resp = await fetch(BACKEND_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ image: base64, latitude:"",longitude:"" }), //!giving random values for now...
+    }).catch((error) => {
+      console.log("Error occured while sending image to backend", error);
+      ToastAndroid.show("Invalid url:" + error, ToastAndroid.SHORT);
+    });
+
+    if (resp){
+
+      ToastAndroid.show("image sent successfully", ToastAndroid.SHORT);
+      console.log("image sent successfully")
+    }
   };
 
   return (
