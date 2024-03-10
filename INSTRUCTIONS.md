@@ -25,6 +25,9 @@ To run the Road Damage Detection System, Clone the repository and follow these i
 
 NOTE: The backend urls might have to be changed due to change in ip addresses. Some fields have been left empty for convineience.
 
-Ensure that you have the necessary tools and dependencies installed for running React and React Native applications, such as Node.js, npm, and the React Native CLI. Additionally, make sure to configure Firebase properly and handle any environment-specific configurations or setup requirements specified in the project documentation.
+**Extent of Completion**
+The mobile app,the user website and the admin dashboard are ready for usage. The YOLO model is also working with good accuracy, and can be used to detect damaged roads.
+As of now, we weren't able to make a pipeline to send the results from the Model to the admin dashboard, due to time constraints. But the images displayed on admin dashboard are authentic, and were detected by the model. Due to the scarcity of road images with geo-location data, we had to randomize the location data for the given images to create a prototype or a MVP (Minimum Viable Product).
 
+We sincerely thank you for your attention, and hope that our work will prove to be useful in one way or another.
 Thank You.
