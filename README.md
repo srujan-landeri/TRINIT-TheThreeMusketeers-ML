@@ -80,4 +80,7 @@ Let's break down the product into its components: the web application for users 
 - Usage analytics and feedback from users and admins are collected to identify areas for improvement and optimization.
 - Regular updates and enhancements are implemented to address user needs and improve the overall user experience.
 
+
 By implementing the Road Damage Detection System with separate interfaces for web, mobile, and admin, along with a robust backend powered by machine learning, the system offers a comprehensive solution for identifying and managing road damages efficiently. The integration with Firebase and cloud deployment ensures scalability, reliability, and security, making it a valuable tool for infrastructure maintenance and management.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
