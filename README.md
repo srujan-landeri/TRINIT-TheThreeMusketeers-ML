@@ -12,7 +12,7 @@ Let's break down the product into its components: the web application for users 
 
 ### Web Application (User Interface)
 
-![Screenshot](output_screenshots\website\firstpage.png)
+![Screenshot](output_screenshots/website/firstpage.png)
 
 #### User Authentication:
 - The web application provides a user authentication system powered by Firebase Authentication.
@@ -20,10 +20,10 @@ Let's break down the product into its components: the web application for users 
 - Firebase Authentication handles user registration, login, and password reset functionalities securely.
 
 #### Login Page
-![Screenshot](output_screenshots\website\loginpage.png)
+![Screenshot](output_screenshots/website/loginpage.png)
 
 #### Signup Page
-![Screenshot](output_screenshots\website\signup_page.png)
+![Screenshot](output_screenshots/website/signup_page.png)
 
 #### Photo Upload:
 - Authenticated users can upload photos of damaged roads through the web application.
@@ -32,7 +32,7 @@ Let's break down the product into its components: the web application for users 
 
 
 #### Upload Image
-![Screenshot](output_screenshots\website\homepage.png)
+![Screenshot](output_screenshots/website/homepage.png)
 
 ### Mobile Application (User Interface)
 
@@ -42,7 +42,7 @@ Let's break down the product into its components: the web application for users 
 - Firebase Authentication ensures a seamless and secure login experience for mobile users.
 
 #### Login Page
-![Screenshot](output_screenshots\mobile_app\login.jpeg)
+![Screenshot](output_screenshots/mobile_app/login.jpeg)
 
 #### Signup Page
 ![Screenshot](output_screenshots/mobile_app/signup.jpeg)
@@ -55,13 +55,13 @@ Let's break down the product into its components: the web application for users 
 - Uploaded photos are stored securely in Firebase Cloud Storage, just like in the web application.
 
 #### Homepage
-![Screenshot](output_screenshots\mobile_app\homapage.jpeg)
+![Screenshot](output_screenshots/mobile_app/homapage.jpeg)
 
 #### Capture Photo from Camera
-![Screenshot](output_screenshots\mobile_app\camera_image.jpeg)
+![Screenshot](output_screenshots/mobile_app/camera_image.jpeg)
 
 #### Choose Photo from Gallery
-![Screenshot](output_screenshots\mobile_app\image_editable.jpeg)
+![Screenshot](output_screenshots/mobile_app/image_editable.jpeg)
 
 
 
@@ -72,7 +72,7 @@ Let's break down the product into its components: the web application for users 
 - Only authorized users with administrative privileges can access the admin dashboard.
 - Firebase Authentication is used to authenticate admin users securely.
 
-![Screenshot](output_screenshots\website\loginpage.png)
+![Screenshot](output_screenshots/website/loginpage.png)
 
 #### Road Data Management:
 - The admin dashboard provides a comprehensive overview of all uploaded photos of damaged roads.
@@ -80,10 +80,10 @@ Let's break down the product into its components: the web application for users 
 - The dashboard includes features for searching, sorting, and filtering road data to facilitate efficient management.
 
 #### Filtered Road Images
-![Screenshot](output_screenshots\website\admin_website\filtered_road_damages2.png)
+![Screenshot](output_screenshots/website/admin_website/filtered_road_damages2.png)
 
 #### Detailed View of Damaged Road:
-![Screenshot](output_screenshots\website\admin_website\details_of_damage.png)
+![Screenshot](output_screenshots/website/admin_website/details_of_damage.png)
 
 
 #### Map Visualization:
@@ -93,7 +93,7 @@ Let's break down the product into its components: the web application for users 
 - Google Maps API integration is used to render the map and display the road data visually.
 
 #### Damaged Road Images Flagged on Map
-![Screenshot](output_screenshots\website\admin_website\varoius_damaged_roads_flagged_on_map.png)
+![Screenshot](output_screenshots/website/admin_website/varoius_damaged_roads_flagged_on_map.png)
 
 
 ### Machine Learning Component (Backend)
@@ -103,13 +103,13 @@ Let's break down the product into its components: the web application for users 
 - YOLO is trained to detect and locate various types of road damages, including longitudinal cracks, transverse cracks, alligator cracks, and potholes.
 - The machine learning model is trained on a diverse dataset of road images annotated with bounding boxes indicating the location and type of damage.
 
-![Screenshot](output_screenshots\model\D00.jpeg)
+![Screenshot](output_screenshots/model/D00.jpeg)
 
-![Screenshot](output_screenshots\model\D10.jpeg)
+![Screenshot](output_screenshots/model/D10.jpeg)
 
-![Screenshot](output_screenshots\model\D20.jpeg)
+![Screenshot](output_screenshots/model/D20.jpeg)
 
-![Screenshot](output_screenshots\model\D40.jpeg)
+![Screenshot](output_screenshots/model/D40.jpeg)
 
 #### Integration with Web and Mobile Apps:
 - Upon user photo upload through the web or mobile app, the images are processed using the YOLO algorithm for road damage detection.
@@ -117,7 +117,7 @@ Let's break down the product into its components: the web application for users 
 - The web and mobile apps retrieve and display the detected damages from the database, providing users with insights into road conditions.
 
 #### Firebase Integration:
-![Screenshot](output_screenshots\model\firebase_storage.jpeg)
+![Screenshot](output_screenshots/model/firebase_storage.jpeg)
 
 
 ### Deployment and Scalability
