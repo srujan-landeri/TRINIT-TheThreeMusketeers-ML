@@ -2,6 +2,37 @@
 
 ## video link: https://drive.google.com/drive/folders/113GMsWvdYQhvsIYLvfjYLQcyItEqbhaO?usp=sharing
 
+# Table of Contents
+
+1. [Problem Statement](#problem-statement)
+2. [Idea](#idea)
+   - [Web Application (User Interface)](#web-application-user-interface)
+     - [User Authentication](#user-authentication)
+     - [Login Page](#login-page)
+     - [Signup Page](#signup-page)
+     - [Photo Upload](#photo-upload)
+   - [Mobile Application (User Interface)](#mobile-application-user-interface)
+     - [User Authentication](#user-authentication-1)
+     - [Login Page](#login-page-1)
+     - [Signup Page](#signup-page-1)
+     - [Photo Upload](#photo-upload-1)
+   - [Admin Dashboard (Web Interface)](#admin-dashboard-web-interface)
+     - [Authentication](#authentication)
+     - [Road Data Management](#road-data-management)
+     - [Filtered Road Images](#filtered-road-images)
+     - [Detailed View of Damaged Road](#detailed-view-of-damaged-road)
+     - [Map Visualization](#map-visualization)
+     - [Damaged Road Images Flagged on Map](#damaged-road-images-flagged-on-map)
+   - [Machine Learning Component (Backend)](#machine-learning-component-backend)
+     - [Object Detection](#object-detection)
+     - [Integration with Web and Mobile Apps](#integration-with-web-and-mobile-apps)
+     - [Firebase Integration](#firebase-integration)
+   - [Deployment and Scalability](#deployment-and-scalability)
+     - [Firebase Integration](#firebase-integration-1)
+     - [Cloud Deployment](#cloud-deployment)
+     - [Continuous Monitoring and Improvement](#continuous-monitoring-and-improvement)
+
+
 # Problem Statement
 Manual inspection of road conditions is a time-consuming and labor-intensive task, leading to delays in identifying and repairing damaged roads. The goal is to develop a classification model capable of automatically detecting and categorizing road damage from images (captured through CC cameras,phone,etc.).
 
