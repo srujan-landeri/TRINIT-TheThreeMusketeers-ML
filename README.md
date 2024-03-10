@@ -175,42 +175,42 @@ Let's break down the product into its components: the web application for users 
 ### Model Performance
 
 #### Train Batch 0
-![Screenshot](output_screenshots\model\model_performance\train_batch0.jpg)
+![Screenshot](output_screenshots/model/model_performance/train_batch0.jpg)
 
 #### Train Batch 1
-![Screenshot](output_screenshots\model\model_performance\train_batch1.jpg)
+![Screenshot](output_screenshots/model/model_performance/train_batch1.jpg)
 
 #### Train Batch 2
-![Screenshot](output_screenshots\model\model_performance\train_batch2.jpg)
+![Screenshot](output_screenshots/model/model_performance/train_batch2.jpg)
 
 #### Validation Batch 0 labels
-![Screenshot](output_screenshots\model\model_performance\val_batch0_labels.jpg)
+![Screenshot](output_screenshots/model/model_performance/val_batch0_labels.jpg)
 
 #### Validation Batch 0 predictions
-![Screenshot](output_screenshots\model\model_performance\val_batch1_pred.jpg)
+![Screenshot](output_screenshots/model/model_performance/val_batch1_pred.jpg)
 
 #### Validation Batch 1 labels
-![Screenshot](output_screenshots\model\model_performance\val_batch1_labels.jpg)
+![Screenshot](output_screenshots/model/model_performance/val_batch1_labels.jpg)
 
 #### Validation Batch 1 predictions
-![Screenshot](output_screenshots\model\model_performance\val_batch1_pred.jpg)
+![Screenshot](output_screenshots/model/model_performance/val_batch1_pred.jpg)
 
 #### Metrics
 
 #### Confusion Matrix
-![Screenshot](output_screenshots\model\model_performance\confusion_matrix.png)
+![Screenshot](output_screenshots/model/model_performance/confusion_matrix.png)
 
 #### PR Curve
-![Screenshot](output_screenshots\model\model_performance\PR_curve.png)
+![Screenshot](output_screenshots/model/model_performance/PR_curve.png)
 
 #### F1 Curve
-![Screenshot](output_screenshots\model\model_performance\F1_curve.png)
+![Screenshot](output_screenshots/model/model_performance/F1_curve.png)
 
 #### Labels Correlogram
-![Screenshot](output_screenshots\model\model_performance\labels_correlogram.jpg)
+![Screenshot](output_screenshots/model/model_performance/labels_correlogram.jpg)
 
 #### Results
-![Screenshot](output_screenshots\model\model_performance\results.png)
+![Screenshot](output_screenshots/model/model_performance/results.png)
 
 ### Deployment and Scalability
 
