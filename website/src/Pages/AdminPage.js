@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 import data from '../data/images/random_coords_with_images.json'
 import { DetectedDamages } from '../Components/DetectedDamages';
 import { Locations } from '../Components/Locations';
-import { Statistics } from '../Components/Statistics';
 
 export function AdminPage() {
   const navigate = useNavigate();
@@ -84,7 +83,6 @@ export function AdminPage() {
             <div className='nav'>
               <button className={currentTab === "Detected Damages"? "active" : ""} onClick={() => changeTab("Detected Damages")}>Detected Damages</button>
               <button className={currentTab === "Locations"? "active" : ""} onClick={() => changeTab("Locations")}>Locations</button>
-              <button className={currentTab === "Statistics"? "active" : ""} onClick={() => changeTab("Statistics")}>Stats</button>
               <button onClick={signout}>Logout</button>
             </div>
 
@@ -92,7 +90,6 @@ export function AdminPage() {
         <div className='admin-body'>
           {proxyData && currentTab === "Detected Damages" && <DetectedDamages data={proxyData} />}
           {proxyData && currentTab === "Locations" && <Locations data={proxyData} />}
-          {proxyData && currentTab === "Statistics" && <Statistics data={proxyData} />}
         </div>
         </>
       }
