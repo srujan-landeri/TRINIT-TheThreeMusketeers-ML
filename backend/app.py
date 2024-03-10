@@ -99,24 +99,34 @@ async def detect_image(request: DetectionRequest):
     #     }
     #     doc_ref.set(doc_data)
 
-    firestore_data = {}
+    
+    data = {
+        "image": annotated_image_base64,
+        "latitude": request.latitude,
+        "longitude": request.longitude
+    }
+
+    # Firestore document reference for 'labels' document within 'images' collection
+    labels_doc_ref = db.collection(u'images').document(u'labels')
+
+    # Using a transaction to update arrays atomically
+    @firestore.transactional
+    def update_in_transaction(transaction, doc_ref, class_name, entry):
+        snapshot = doc_ref.get(transaction=transaction)
+        if snapshot.exists:
+            # If the document has the field, append to it, else create the field with the entry
+            if snapshot.get(class_name) is None:
+                transaction.update(doc_ref, {class_name: [entry]})
+            else:
+                transaction.update(doc_ref, {class_name: firestore.ArrayUnion([entry])})
+        else:
+            # If the document does not exist, create it with the entry
+            transaction.set(doc_ref, {class_name: [entry]})
+
+    # Start the transaction for each class found
+    transaction = db.transaction()
     for class_name in set(classes_found):
-        if class_name not in firestore_data:
-            firestore_data[class_name] = []
-
-        firestore_data[class_name].append({
-            "image": annotated_image_base64,
-            "latitude": request.latitude,
-            "longitude": request.longitude
-        })
-
-    # Upload to Firestore
-    for class_name, data_array in firestore_data.items():
-        # Here we're using `set()` with `merge=True` to append to an existing array
-        # or create it if it does not exist.
-        db.collection(u'images').document(class_name).set({
-            class_name: firestore.ArrayUnion(data_array)
-        }, merge=True)
+        update_in_transaction(transaction, labels_doc_ref, class_name, data)
 
     # shutil.rmtree(annotated_dir, ignore_errors=True)
 
