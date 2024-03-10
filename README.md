@@ -45,6 +45,9 @@
       - [Metrics](#metrics)
       - [Confusion Matrix](#confusion-matrix)
       - [PR Curve](#pr-curve)
+      - [F1 Curve](#f1-curve)
+      - [Labels Correlogram](#labels-correlogram)
+      - [Results](#results)
     - [Deployment and Scalability](#deployment-and-scalability)
       - [Firebase Integration:](#firebase-integration-1)
       - [Cloud Deployment:](#cloud-deployment)
@@ -200,11 +203,14 @@ Let's break down the product into its components: the web application for users 
 #### PR Curve
 ![Screenshot](output_screenshots\model\model_performance\PR_curve.png)
 
+#### F1 Curve
+![Screenshot](output_screenshots\model\model_performance\F1_curve.png)
+
+#### Labels Correlogram
+![Screenshot](output_screenshots\model\model_performance\labels_correlogram.jpg)
+
+#### Results
 ![Screenshot](output_screenshots\model\model_performance\results.png)
-
-
-
-
 
 ### Deployment and Scalability
 
