@@ -15,6 +15,7 @@ export function AdminPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
   const [proxyData, setProxyData] = React.useState(data);
+  const db = getFirestore();
 
   function signout(){
     auth.signOut().then(() => {
@@ -71,7 +72,6 @@ export function AdminPage() {
 
   return (
     <div className='admin'>
-     
       {!loading &&
         <>
         <div className='admin-header'>

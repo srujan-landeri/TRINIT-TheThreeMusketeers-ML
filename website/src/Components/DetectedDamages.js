@@ -124,16 +124,16 @@ export function DetectedDamages(props) {
             />
             <div className="modal-details">
               <p>
-                Label: <span>{selectedImage.label}</span>
+                Label: <span>{selectedImage.label === 'D0'? "D00" : selectedImage.label}</span>
               </p>
               <p>
-                Type: <span>{labelNames[selectedImage.label]}</span>
+                Type: <span>{labelNames[selectedImage.label === 'D0'? "D00" : selectedImage.label]}</span>
               </p>
               <p>
-                Latitude: <span>{selectedImage.latitude}</span>
+                Latitude: <span>{selectedImage.latitude===""?"Not Available": selectedImage.latitude}</span>
               </p>
               <p>
-                Longitude: <span>{selectedImage.longitude}</span>
+                Longitude: <span>{selectedImage.longitude===""?"Not Available": selectedImage.longitude}</span>
               </p>
             </div>
           </div>
