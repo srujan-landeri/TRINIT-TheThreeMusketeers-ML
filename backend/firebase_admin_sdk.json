@@ -1,0 +1,9 @@
+firebaseConfig = {
+    
+    "apiKey": "AIzaSyBIB_4pa2YTZXN28vGRzO9zB_9jg3qz4ho",
+    "authDomain": "automaticroaddamagedetection.firebaseapp.com",
+    "projectId": "automaticroaddamagedetection",
+    "storageBucket": "automaticroaddamagedetection.appspot.com",
+    "messagingSenderId": "35904925297",
+    "appId": "1:35904925297:web:89cb8aae1561689fc075d0"
+}
