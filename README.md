@@ -4,33 +4,51 @@
 
 # Table of Contents
 
-1. [Problem Statement](#problem-statement)
-2. [Idea](#idea)
-   - [Web Application (User Interface)](#web-application-user-interface)
-     - [User Authentication](#user-authentication)
-     - [Login Page](#login-page)
-     - [Signup Page](#signup-page)
-     - [Photo Upload](#photo-upload)
-   - [Mobile Application (User Interface)](#mobile-application-user-interface)
-     - [User Authentication](#user-authentication-1)
-     - [Login Page](#login-page-1)
-     - [Signup Page](#signup-page-1)
-     - [Photo Upload](#photo-upload-1)
-   - [Admin Dashboard (Web Interface)](#admin-dashboard-web-interface)
-     - [Authentication](#authentication)
-     - [Road Data Management](#road-data-management)
-     - [Filtered Road Images](#filtered-road-images)
-     - [Detailed View of Damaged Road](#detailed-view-of-damaged-road)
-     - [Map Visualization](#map-visualization)
-     - [Damaged Road Images Flagged on Map](#damaged-road-images-flagged-on-map)
-   - [Machine Learning Component (Backend)](#machine-learning-component-backend)
-     - [Object Detection](#object-detection)
-     - [Integration with Web and Mobile Apps](#integration-with-web-and-mobile-apps)
-     - [Firebase Integration](#firebase-integration)
-   - [Deployment and Scalability](#deployment-and-scalability)
-     - [Firebase Integration](#firebase-integration-1)
-     - [Cloud Deployment](#cloud-deployment)
-     - [Continuous Monitoring and Improvement](#continuous-monitoring-and-improvement)
+- [TRINIT-TheThreeMusketeers-ML](#trinit-thethreemusketeers-ml)
+  - [video link: https://drive.google.com/drive/folders/113GMsWvdYQhvsIYLvfjYLQcyItEqbhaO?usp=sharing](#video-link-httpsdrivegooglecomdrivefolders113gmswvdyqhvsiylvfjylqcyiteqbhaouspsharing)
+- [Table of Contents](#table-of-contents)
+- [Problem Statement](#problem-statement)
+- [Idea](#idea)
+    - [Web Application (User Interface)](#web-application-user-interface)
+      - [User Authentication:](#user-authentication)
+      - [Login Page](#login-page)
+      - [Signup Page](#signup-page)
+      - [Photo Upload:](#photo-upload)
+      - [Upload Image](#upload-image)
+    - [Mobile Application (User Interface)](#mobile-application-user-interface)
+      - [User Authentication:](#user-authentication-1)
+      - [Login Page](#login-page-1)
+      - [Signup Page](#signup-page-1)
+      - [Photo Upload:](#photo-upload-1)
+      - [Homepage](#homepage)
+      - [Capture Photo from Camera](#capture-photo-from-camera)
+      - [Choose Photo from Gallery](#choose-photo-from-gallery)
+    - [Admin Dashboard (Web Interface)](#admin-dashboard-web-interface)
+      - [Authentication:](#authentication)
+      - [Road Data Management:](#road-data-management)
+      - [Filtered Road Images](#filtered-road-images)
+      - [Detailed View of Damaged Road:](#detailed-view-of-damaged-road)
+      - [Map Visualization:](#map-visualization)
+      - [Damaged Road Images Flagged on Map](#damaged-road-images-flagged-on-map)
+    - [Machine Learning Component (Backend)](#machine-learning-component-backend)
+      - [Object Detection:](#object-detection)
+      - [Integration with Web and Mobile Apps:](#integration-with-web-and-mobile-apps)
+      - [Firebase Integration:](#firebase-integration)
+    - [Model Performance](#model-performance)
+      - [Train Batch 0](#train-batch-0)
+      - [Train Batch 1](#train-batch-1)
+      - [Train Batch 2](#train-batch-2)
+      - [Validation Batch 0 labels](#validation-batch-0-labels)
+      - [Validation Batch 0 predictions](#validation-batch-0-predictions)
+      - [Validation Batch 1 labels](#validation-batch-1-labels)
+      - [Validation Batch 1 predictions](#validation-batch-1-predictions)
+      - [Metrics](#metrics)
+      - [Confusion Matrix](#confusion-matrix)
+      - [PR Curve](#pr-curve)
+    - [Deployment and Scalability](#deployment-and-scalability)
+      - [Firebase Integration:](#firebase-integration-1)
+      - [Cloud Deployment:](#cloud-deployment)
+      - [Continuous Monitoring and Improvement:](#continuous-monitoring-and-improvement)
 
 
 # Problem Statement
@@ -149,6 +167,43 @@ Let's break down the product into its components: the web application for users 
 
 #### Firebase Integration:
 ![Screenshot](output_screenshots/model/firebase_storage.jpeg)
+
+
+### Model Performance
+
+#### Train Batch 0
+![Screenshot](output_screenshots\model\model_performance\train_batch0.jpg)
+
+#### Train Batch 1
+![Screenshot](output_screenshots\model\model_performance\train_batch1.jpg)
+
+#### Train Batch 2
+![Screenshot](output_screenshots\model\model_performance\train_batch2.jpg)
+
+#### Validation Batch 0 labels
+![Screenshot](output_screenshots\model\model_performance\val_batch0_labels.jpg)
+
+#### Validation Batch 0 predictions
+![Screenshot](output_screenshots\model\model_performance\val_batch1_pred.jpg)
+
+#### Validation Batch 1 labels
+![Screenshot](output_screenshots\model\model_performance\val_batch1_labels.jpg)
+
+#### Validation Batch 1 predictions
+![Screenshot](output_screenshots\model\model_performance\val_batch1_pred.jpg)
+
+#### Metrics
+
+#### Confusion Matrix
+![Screenshot](output_screenshots\model\model_performance\confusion_matrix.png)
+
+#### PR Curve
+![Screenshot](output_screenshots\model\model_performance\PR_curve.png)
+
+![Screenshot](output_screenshots\model\model_performance\results.png)
+
+
+
 
 
 ### Deployment and Scalability
