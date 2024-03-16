@@ -1,6 +1,6 @@
 # TRINIT-TheThreeMusketeers-ML
 
-## video link: https://drive.google.com/drive/folders/113GMsWvdYQhvsIYLvfjYLQcyItEqbhaO?usp=sharing
+#### video link: https://drive.google.com/drive/folders/113GMsWvdYQhvsIYLvfjYLQcyItEqbhaO?usp=sharing
 
 # Table of Contents
 
@@ -94,10 +94,10 @@ Let's break down the product into its components: the web application for users 
 - Firebase Authentication ensures a seamless and secure login experience for mobile users.
 
 #### Login Page
-![Screenshot](output_screenshots/mobile_app/login.jpeg)
+<img width="300px" src = "output_screenshots/mobile_app/login.jpeg" />
 
 #### Signup Page
-![Screenshot](output_screenshots/mobile_app/signup.jpeg)
+<img width="300px" src = "output_screenshots/mobile_app/signup.jpeg" />
 
 
 #### Photo Upload:
@@ -107,13 +107,13 @@ Let's break down the product into its components: the web application for users 
 - Uploaded photos are stored securely in Firebase Cloud Storage, just like in the web application.
 
 #### Homepage
-![Screenshot](output_screenshots/mobile_app/homapage.jpeg)
+<img width="300px" src = "output_screenshots/mobile_app/homapage.jpeg"/>
 
 #### Capture Photo from Camera
-![Screenshot](output_screenshots/mobile_app/camera_image.jpeg)
+<img width="300px" src = "output_screenshots/mobile_app/camera_image.jpeg"/>
 
 #### Choose Photo from Gallery
-![Screenshot](output_screenshots/mobile_app/image_editable.jpeg)
+<img width="300px" src = "output_screenshots/mobile_app/image_editable.jpeg"/>
 
 
 
