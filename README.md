@@ -86,6 +86,10 @@ Let's break down the product into its components: the web application for users 
 #### Upload Image
 ![Screenshot](output_screenshots/website/homepage.png)
 
+# USER DEMO [website]
+
+https://github.com/srujan-landeri/TRINIT-TheThreeMusketeers-ML/assets/66351075/5d6662ba-e8f5-4697-9e9d-3711ad23d43f
+
 ### Mobile Application (User Interface)
 
 #### User Authentication:
@@ -98,7 +102,6 @@ Let's break down the product into its components: the web application for users 
 
 #### Signup Page
 <img width="300px" src = "output_screenshots/mobile_app/signup.jpeg" />
-
 
 #### Photo Upload:
 - Similar to the web application, the mobile app allows users to upload photos of damaged roads.
@@ -114,8 +117,6 @@ Let's break down the product into its components: the web application for users 
 
 #### Choose Photo from Gallery
 <img width="300px" src = "output_screenshots/mobile_app/image_editable.jpeg"/>
-
-
 
 ### Admin Dashboard (Web Interface)
 
@@ -147,6 +148,7 @@ Let's break down the product into its components: the web application for users 
 #### Damaged Road Images Flagged on Map
 ![Screenshot](output_screenshots/website/admin_website/varoius_damaged_roads_flagged_on_map.png)
 
+https://github.com/srujan-landeri/TRINIT-TheThreeMusketeers-ML/assets/66351075/8500f26b-ba23-4d6f-a725-20244ccb0f10
 
 ### Machine Learning Component (Backend)
 
